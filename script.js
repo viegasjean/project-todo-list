@@ -43,5 +43,3 @@ botaoApagaCompletos.addEventListener('click', function(){
     tarefasCompletas[0].remove();
   }
 })
-
-
