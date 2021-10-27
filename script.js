@@ -8,14 +8,14 @@ const botaoSalvaTarefas = document.getElementById('salvar-tarefas');
 const botaoMoverCima = document.getElementById('mover-cima');
 const botaoMoverBaixo = document.getElementById('mover-baixo');
 const botaoRemoverSelecionado = document.getElementById('remover-selecionado');
-const tarefasCompletas = document.getElementsByClassName('tarefa completed');
+const tarefasCompletas = document.getElementsByClassName('completed');
 
 // Função para desmarcar todas as tarefas e marcar somente o alvo
 function marcaTarefa(e) {
-  for (let tarefa of tarefas) {
-    tarefa.id = ''
+  for (const tarefa of tarefas) {
+    tarefa.id = '';
   }
-  e.target.id = 'selected'
+  e.target.id = 'selected';
 }
 
 // Função para marcar a tarefa como completa
@@ -46,7 +46,7 @@ botaoApagaTudo.addEventListener('click', () => {
 // Ação para apagar todas as tarefas marcadas como completas, da ultima para a primeira
 botaoApagaCompletos.addEventListener('click', () => {
   for (let i = tarefasCompletas.length - 1; i >= 0; i -= 1) {
-    tarefasCompletas[i].remove()
+    tarefasCompletas[i].remove();
   }
 });
 
@@ -56,7 +56,7 @@ botaoSalvaTarefas.addEventListener('click', () => {
 });
 
 // Ao carregar a página converte de volta para HTML e o carrega
-window.onload = function () {
+window.onload = () => {
   const listaSalva = JSON.parse(localStorage.getItem('lista'));
   listaTarefas.innerHTML = listaSalva;
 };
@@ -64,19 +64,18 @@ window.onload = function () {
 // Adiciona evento para mover a tarefa selecionada para a posição superior, se houver
 botaoMoverCima.addEventListener('click', () => {
   const tarefaSelecionada = document.getElementById('selected');
-  if (tarefaSelecionada && tarefaSelecionada != tarefaSelecionada.parentNode.firstElementChild) {
-    tarefaSelecionada.parentNode.insertBefore(tarefaSelecionada, tarefaSelecionada.previousElementSibling);
+  if (tarefaSelecionada && tarefaSelecionada !== tarefaSelecionada.parentNode.firstElementChild) {
+    tarefaSelecionada.parentNode.insertBefore(tarefaSelecionada,
+      tarefaSelecionada.previousElementSibling);
   }
-})
-
+});
 
 // Adiciona evento para mover a tarefa selecionada para a posição inferior, se houver
 botaoMoverBaixo.addEventListener('click', () => {
   const tarefaSelecionada = document.getElementById('selected');
-  if (tarefaSelecionada && tarefaSelecionada != tarefaSelecionada.parentNode.lastElementChild) {
-    tarefaSelecionada.nextElementSibling.insertAdjacentElement('afterend', tarefaSelecionada)
+  if (tarefaSelecionada && tarefaSelecionada !== tarefaSelecionada.parentNode.lastElementChild) {
+    tarefaSelecionada.nextElementSibling.insertAdjacentElement('afterend', tarefaSelecionada);
   }
-
 });
 
 // Ação para remover somente a tarefa que estiver selecionada
